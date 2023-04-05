@@ -32,6 +32,7 @@ const App = () => {
 
   const handleChange = (e) => {
     setId(e.target.value)
+    setData(null)
   }
   return (
     <>
