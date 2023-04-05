@@ -6,11 +6,9 @@ import { PhotoFrame } from './PhotoFrame'
 const App = () => {
   const [photodata, setData] = useState(null)
   const [id, setId] = useState('')
-  const [loader, setLoader] = useState(false)
 
   useEffect(() => {
     const fetchapi = async () => {
-      setLoader(true)
       try {
         const res = await fetch(
           `https://jsonplaceholder.typicode.com/photos/${id}`
@@ -21,8 +19,6 @@ const App = () => {
       } catch (err) {
         console.log(err)
         setData(null)
-      } finally {
-        setLoader(false)
       }
     }
     if (id !== '') {
@@ -48,8 +44,12 @@ const App = () => {
           required
         />
       </div>
-      {loader && <Loader />}
-      {photodata && <PhotoFrame url={photodata.url} title={photodata.title} />}
+
+      {photodata ? (
+        <PhotoFrame url={photodata.url} title={photodata.title} />
+      ) : (
+        <Loader />
+      )}
     </>
   )
 }
