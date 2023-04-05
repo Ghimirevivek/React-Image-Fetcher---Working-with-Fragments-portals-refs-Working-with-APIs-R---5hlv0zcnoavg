@@ -10,6 +10,7 @@ const App = () => {
 
   const handleChange = (e) => {
     setId(e.target.value)
+    fetchapi()
   }
   const fetchapi = async () => {
     setLoading(true)
@@ -26,9 +27,7 @@ const App = () => {
       setLoading(false)
     }
   }
-  const handleClick = () => {
-    fetchapi()
-  }
+
   return (
     <>
       <div>
@@ -42,7 +41,6 @@ const App = () => {
           onChange={handleChange}
           required
         />
-        <button onClick={handleClick}>Fetch</button>
       </div>
       {loading && <Loader />}
       {photodata && <PhotoFrame url={photodata.url} title={photodata.title} />}
